@@ -1,16 +1,5 @@
-import { isInitial, keyToHangul, findCompoundInitial } from "./hangul-data";
+import { isInitial, keyToHangul } from "./hangul-data";
 import { I, type InputToken } from "./input";
-
-const getInputType = (input: string): I => {
-  if (input === "Backspace") return I.backspace;
-  if (isInitial(input)) {
-    if (/[ㄲㄸㅃㅆㅉ]/.test(input)) {
-      return I.compound_consonant;
-    }
-    return I.consonant;
-  }
-  return I.vowel;
-}
 
 export const keyToInputToken = (key: string): InputToken | undefined => {
   if (key === "Backspace") {
@@ -18,10 +7,7 @@ export const keyToInputToken = (key: string): InputToken | undefined => {
   }
   if (/^[a-z]$/i.test(key)) {
     const input = keyToHangul(key)!;
-    const type = getInputType(input);
-    if (type === I.compound_consonant) {
-      return { type, value: findCompoundInitial(input)! };
-    }
+    const type = isInitial(input) ? I.consonant : I.vowel;
     return { type, value: input };
   }
 }

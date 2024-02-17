@@ -1,11 +1,8 @@
-import { getFinalIndex, getInitialIndex, getMedialIndex, findCompoundMedial, findCompoundFinal, findCompoundInitial } from "./hangul-data";
+import { findCompoundFinal, findCompoundMedial, getFinalIndex, getInitialIndex, getMedialIndex } from "./hangul-data";
 import { S, type State } from "./state";
 
 const initialToString = (state: { initial?: string }) => {
   let initial = state.initial;
-  if (initial?.length == 2) {
-    initial = findCompoundInitial(initial);
-  }
   return initial ?? "♥";
 }
 const medialToString = (state: { medial?: string }) => {

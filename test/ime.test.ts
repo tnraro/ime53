@@ -12,7 +12,7 @@ describe("scenario", () => {
   rksk -> 가나
   ekfrk -> 달가
 
-  rr -> ㄲ
+  rr -> ㄱㄱ
   rkqt -> 값
   fg -> ㄹㅎ
   wlqr -> 집ㄱ
@@ -28,8 +28,10 @@ describe("scenario", () => {
   krq -> 갑
   rkqq -> 갑ㅂ
   rkQ -> 가ㅃ
-  rktt -> 갔
-  rkttk -> 가싸
+  rktt -> 갓ㅅ
+  rkT -> 갔
+  rkttk -> 갓사
+  rkTk -> 가싸
 
   android -> 뭉개야
   dkssudgktpdy? -> 안녕하세요?
@@ -41,7 +43,7 @@ describe("scenario", () => {
   ghkrdls -> 확인
   hkgrdls -> 확인
   qnpfr -> 뷁
-
+  ajrrh -> 먹고
   `
     .matchAll(/^\s*(?<input_seq>.*?)\s*->\s*(?<output>.+?)\s*$/gm)]
     .map(x => {
@@ -79,9 +81,9 @@ describe("step-by-step", () => {
     expect(ime.next("1")).toStrictEqual({ ok: false });
     ime.reset();
   });
-  test("ㄲ", () => {
+  test("ㄱㄱ", () => {
     expect(ime.next("r")).toStrictEqual({ ok: true, replace: false, value: "ㄱ" });
-    expect(ime.next("r")).toStrictEqual({ ok: true, replace: true, value: "ㄲ" });
+    expect(ime.next("r")).toStrictEqual({ ok: true, replace: false, value: "ㄱ" });
     ime.reset();
   });
   test("가", () => {
@@ -159,7 +161,9 @@ describe("step-by-step", () => {
     expect(ime.next("x")).toStrictEqual({ ok: true, replace: false, value: "ㅌ" });
     expect(ime.next("m")).toStrictEqual({ ok: true, replace: true, value: "트" });
     expect(ime.next("l")).toStrictEqual({ ok: true, replace: true, value: "틔" });
+    expect(ime.next("Backspace")).toStrictEqual({ ok: true, replace: true, value: "트" });
     expect(ime.next("Backspace")).toStrictEqual({ ok: true, replace: true, value: "ㅌ" });
+    expect(ime.next("Backspace")).toStrictEqual({ ok: false });
     ime.reset();
   });
   test("Epr BS", () => {
@@ -174,8 +178,14 @@ describe("step-by-step", () => {
     expect(ime.next("k")).toStrictEqual({ ok: true, replace: true, value: "바" });
     expect(ime.next("f")).toStrictEqual({ ok: true, replace: true, value: "발" });
     expect(ime.next("q")).toStrictEqual({ ok: true, replace: true, value: "밟" });
+    expect(ime.next("Backspace")).toStrictEqual({ ok: true, replace: true, value: "발" });
     expect(ime.next("Backspace")).toStrictEqual({ ok: true, replace: true, value: "바" });
+    expect(ime.next("Backspace")).toStrictEqual({ ok: true, replace: true, value: "ㅂ" });
+    expect(ime.next("Backspace")).toStrictEqual({ ok: false });
     ime.reset();
+  });
+  test("BS", () => {
+    expect(ime.next("Backspace")).toStrictEqual({ ok: false });
   });
 });
 

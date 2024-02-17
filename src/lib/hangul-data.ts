@@ -30,20 +30,11 @@ export const getFinalIndex = (key: string) => {
 
 export const isInitial = (key: string) =>
   getInitialIndex(key) != null;
+export const isFinal = (key: string) =>
+  getFinalIndex(key) != null;
 
 const compound = {
-  initial: new Map(Object.entries({
-    ㄱㄱ: "ㄲ",
-    ㄷㄷ: "ㄸ",
-    ㅂㅂ: "ㅃ",
-    ㅅㅅ: "ㅆ",
-    ㅈㅈ: "ㅉ",
-    ㄲ: "ㄱㄱ",
-    ㄸ: "ㄷㄷ",
-    ㅃ: "ㅂㅂ",
-    ㅆ: "ㅅㅅ",
-    ㅉ: "ㅈㅈ"
-  })),
+  initial: new Map(),
   medial: new Map(Object.entries({
     ㅗㅏ: "ㅘ",
     ㅗㅐ: "ㅙ",
@@ -61,7 +52,6 @@ const compound = {
     ㅢ: "ㅡㅣ",
   })),
   final: new Map(Object.entries({
-    ㄱㄱ: "ㄲ",
     ㄱㅅ: "ㄳ",
     ㄴㅈ: "ㄵ",
     ㄴㅎ: "ㄶ",
@@ -73,8 +63,6 @@ const compound = {
     ㄹㅍ: "ㄿ",
     ㄹㅎ: "ㅀ",
     ㅂㅅ: "ㅄ",
-    ㅅㅅ: "ㅆ",
-    ㄲ: "ㄱㄱ",
     ㄳ: "ㄱㅅ",
     ㄵ: "ㄴㅈ",
     ㄶ: "ㄴㅎ",
@@ -86,7 +74,6 @@ const compound = {
     ㄿ: "ㄹㅍ",
     ㅀ: "ㄹㅎ",
     ㅄ: "ㅂㅅ",
-    ㅆ: "ㅅㅅ",
   })),
 }
 
