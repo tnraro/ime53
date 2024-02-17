@@ -18,6 +18,7 @@
   },
   "scripts": {
     "test": "jest",
+    "coverage": "jest --coverage",
     "build": "tsup"
   },
   "license": "MIT",
